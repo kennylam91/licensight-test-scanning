@@ -20,4 +20,7 @@ jobs:
       - name: 
 
       - name: Run executable
-        run: "./licensight-scan generate -d ${{ github.workspace }}/npm/playwright -a test-scan-on-macOS -e https://licensight-dev.homologation.cloud -at 1flRz2MT2zjx/ZR94/oP6kOd5eRHh00d"
+        run: |
+          ls
+          PLAYWRIGHT_PATH="${{ github.workspace }}/npm/playwright"
+          "./licensight-scan generate -d $PLAYWRIGHT_PATH -a test-scan-on-macOS -e https://licensight-dev.homologation.cloud -at 1flRz2MT2zjx/ZR94/oP6kOd5eRHh00d"
