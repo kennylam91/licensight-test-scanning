@@ -17,10 +17,8 @@ jobs:
         run: |
           curl -O https://licensight.s3.eu-central-1.amazonaws.com/latest/osx/licensight-scan
           chmod +x ./licensight-scan
-      - name: 
-
       - name: Run executable
         run: |
           ls
           PLAYWRIGHT_PATH="${{ github.workspace }}/npm/playwright"
-          "./licensight-scan generate -d $PLAYWRIGHT_PATH -a test-scan-on-macOS -e https://licensight-dev.homologation.cloud -at 1flRz2MT2zjx/ZR94/oP6kOd5eRHh00d"
+          ./licensight-scan generate -d $PLAYWRIGHT_PATH -a test-scan-on-macOS -e https://licensight-dev.homologation.cloud -at 1flRz2MT2zjx/ZR94/oP6kOd5eRHh00d
