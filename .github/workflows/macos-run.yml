@@ -3,7 +3,7 @@ name: Run Executable on macOS
 on:
   push:
     branches:
-      - main
+      - master
 
 jobs:
   run-executable:
