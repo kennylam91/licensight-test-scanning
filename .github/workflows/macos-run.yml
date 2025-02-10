@@ -1,0 +1,22 @@
+name: Run Executable on macOS
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  run-executable:
+    runs-on: macos-latest  # Use macOS runner
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Download executable
+        run: |
+          curl -O https://licensight.s3.eu-central-1.amazonaws.com/latest/osx/licensight-scan
+          chmod +x ./licensight-scan
+
+      - name: Run executable
+        run: ./licensight-scan generate -d ./npm/playwright -a test-scan-on-macOS -e https://licensight-dev.homologation.cloud -at 1flRz2MT2zjx/ZR94/oP6kOd5eRHh00d
