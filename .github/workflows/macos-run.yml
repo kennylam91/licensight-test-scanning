@@ -20,6 +20,7 @@ jobs:
         run: |
           cd npm/playwright
           npm install
+          cat package-lock.json
 
       - name: Download executable
         run: |
