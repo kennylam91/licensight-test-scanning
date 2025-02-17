@@ -19,7 +19,7 @@ jobs:
           chmod +x ./licensight-scan
       - name: Run executable
         run: |
-          ./licensight-scan generate -d $(pwd)/npm/playwright -a test-scan-on-macOS -e https://licensight-dev.homologation.cloud -at 1flRz2MT2zjx/ZR94/oP6kOd5eRHh00d
+          ./licensight-scan generate -d $(pwd)/npm/playwright -a test-scan-on-macOS -e https://licensight-dev.homologation.cloud -at 1flRz2MT2zjx/ZR94/oP6kOd5eRHh00d -b macos13
   macos-14-scan:
     runs-on: macos-14  # Use macOS runner
 
@@ -33,7 +33,7 @@ jobs:
           chmod +x ./licensight-scan
       - name: Run executable
         run: |
-          ./licensight-scan generate -d $(pwd)/npm/playwright -a test-scan-on-macOS -e https://licensight-dev.homologation.cloud -at 1flRz2MT2zjx/ZR94/oP6kOd5eRHh00d
+          ./licensight-scan generate -d $(pwd)/npm/playwright -a test-scan-on-macOS -e https://licensight-dev.homologation.cloud -at 1flRz2MT2zjx/ZR94/oP6kOd5eRHh00d -b macos14
   macos-15-scan:
     runs-on: macos-15  # Use macOS runner
 
@@ -47,4 +47,4 @@ jobs:
           chmod +x ./licensight-scan
       - name: Run executable
         run: |
-          ./licensight-scan generate -d $(pwd)/npm/playwright -a test-scan-on-macOS -e https://licensight-dev.homologation.cloud -at 1flRz2MT2zjx/ZR94/oP6kOd5eRHh00d
+          ./licensight-scan generate -d $(pwd)/npm/playwright -a test-scan-on-macOS -e https://licensight-dev.homologation.cloud -at 1flRz2MT2zjx/ZR94/oP6kOd5eRHh00d -b macos15
