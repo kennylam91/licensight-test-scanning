@@ -6,8 +6,36 @@ on:
       - master
 
 jobs:
-  run-executable:
-    runs-on: macos-latest  # Use macOS runner
+  macos-13-scan:
+    runs-on: macos-13  # Use macOS runner
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Download executable
+        run: |
+          curl -O https://licensight.s3.eu-central-1.amazonaws.com/latest/osx/licensight-scan
+          chmod +x ./licensight-scan
+      - name: Run executable
+        run: |
+          ./licensight-scan generate -d $(pwd)/npm/playwright -a test-scan-on-macOS -e https://licensight-dev.homologation.cloud -at 1flRz2MT2zjx/ZR94/oP6kOd5eRHh00d
+  macos-14-scan:
+    runs-on: macos-14  # Use macOS runner
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Download executable
+        run: |
+          curl -O https://licensight.s3.eu-central-1.amazonaws.com/latest/osx/licensight-scan
+          chmod +x ./licensight-scan
+      - name: Run executable
+        run: |
+          ./licensight-scan generate -d $(pwd)/npm/playwright -a test-scan-on-macOS -e https://licensight-dev.homologation.cloud -at 1flRz2MT2zjx/ZR94/oP6kOd5eRHh00d
+  macos-15-scan:
+    runs-on: macos-15  # Use macOS runner
 
     steps:
       - name: Checkout repository
