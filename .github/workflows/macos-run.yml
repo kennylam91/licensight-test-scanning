@@ -47,7 +47,7 @@ jobs:
 
       - name: Download executable
         run: |
-          curl -O https://licensight.s3.eu-central-1.amazonaws.com/1.1.0.pre-release/licensight-scan
+          curl -O https://licensight.s3.eu-central-1.amazonaws.com/1.1.0.pre-release/osx/licensight-scan
           chmod +x ./licensight-scan
       - name: Run executable
         run: |
