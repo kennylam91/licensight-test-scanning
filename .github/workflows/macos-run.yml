@@ -6,7 +6,7 @@ on:
       - master
 
 jobs:
-  macos-15-scan-1.0.0:
+  macos-15-scan-old:
     runs-on: macos-15  # Use macOS runner
 
     steps:
@@ -29,7 +29,7 @@ jobs:
       - name: Run executable
         run: |
           ./licensight-scan generate -d $(pwd)/npm/playwright -a test-scan-on-macOS -e https://licensight-dev.homologation.cloud -at 1flRz2MT2zjx/ZR94/oP6kOd5eRHh00d -b macos15-with-node-modules-by-1.1.0
-  macos-15-scan-1.1.0.pre-release:
+  macos-15-scan-new:
     runs-on: macos-15  # Use macOS runner
 
     steps:
