@@ -1,4 +1,4 @@
-name: Run Executable on macOS
+name: Run Executable on Ubuntu
 
 on:
   push:
