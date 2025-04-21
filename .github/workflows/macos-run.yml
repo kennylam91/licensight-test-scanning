@@ -35,7 +35,8 @@ jobs:
         run: |
           ./licensight-scan generate -d $(pwd)/npm/playwright -a test-scan-on-macOS -e https://licensight-dev.homologation.cloud -at 1flRz2MT2zjx/ZR94/oP6kOd5eRHh00d -b macos15-with-node-modules-by-1.1.0
   default-runner:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
+    environment: dev
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
