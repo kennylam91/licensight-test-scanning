@@ -7,7 +7,7 @@ on:
 
 jobs:
   macos-15-scan-old:
-    runs-on: macos-15  # Use macOS runner
+    runs-on: macos-15 # Use macOS runner
 
     steps:
       - name: Checkout repository
@@ -15,7 +15,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: "18"
       - name: install dependencies
         run: |
           cd npm/playwright
@@ -29,26 +29,33 @@ jobs:
       - name: Run executable
         run: |
           ./licensight-scan generate -d $(pwd)/npm/playwright -a test-scan-on-macOS -e https://licensight-dev.homologation.cloud -at 1flRz2MT2zjx/ZR94/oP6kOd5eRHh00d -b macos15-with-node-modules-by-1.1.0
-  macos-15-scan-new:
-    runs-on: macos-15  # Use macOS runner
-
+  default-runner:
+    runs-on: ubuntu-20.04
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
-      - name: install dependencies
+          node-version: "18"
+      - name: Determine branch name
+        id: extract_branch
         run: |
-          cd npm/playwright
-          npm install
-          cat package-lock.json
-
-      - name: Download executable
+          if [[ "${{ github.event_name }}" == "pull_request" ]]; then
+            echo "Branch name: ${{ github.head_ref }}"
+            echo "::set-output name=branch::${{ github.head_ref }}"
+          else
+            echo "Branch name: ${GITHUB_REF#refs/heads/}"
+            echo "::set-output name=branch::${GITHUB_REF#refs/heads/}"
+          fi
+      - name: Licensight scan for branch
         run: |
-          curl -O https://licensight.s3.eu-central-1.amazonaws.com/1.1.0.pre-release/osx/licensight-scan
-          chmod +x ./licensight-scan
-      - name: Run executable
+          curl -Lo $RUNNER_TEMP/licensight-scan -O https://licensight.s3.eu-central-1.amazonaws.com/latest/linux/licensight-scan
+          chmod +x $RUNNER_TEMP/licensight-scan
+          $RUNNER_TEMP/licensight-scan generate -a ${{ vars.LICENSIGHT_APPLICATION_NAME }} -d . -e ${{ vars.LICENSIGHT_URL }} -at ${{ vars.LICENSIGHT_ACCESS_TOKEN }} -b ${{ steps.extract_branch.outputs.branch }}
+      - name: Licensight scan for tag
+        if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/')
         run: |
-          ./licensight-scan generate -d $(pwd)/npm/playwright -a test-scan-on-macOS -e https://licensight-dev.homologation.cloud -at 1flRz2MT2zjx/ZR94/oP6kOd5eRHh00d -b macos15-with-node-modules-by-1.1.0.pre-release
+          curl -Lo $RUNNER_TEMP/licensight-scan -O https://licensight.s3.eu-central-1.amazonaws.com/latest/linux/licensight-scan
+          chmod +x $RUNNER_TEMP/licensight-scan
+          $RUNNER_TEMP/licensight-scan generate -a ${{ vars.LICENSIGHT_APPLICATION_NAME }} -d . -e ${{ vars.LICENSIGHT_URL }} -at ${{ vars.LICENSIGHT_ACCESS_TOKEN }} -t ${{ github.ref_name }}
