@@ -37,7 +37,7 @@ jobs:
           fi
       - name: download licensight-scan
         run: |
-          curl -Lo $RUNNER_TEMP/licensight-scan -O https://licensight.s3.eu-central-1.amazonaws.com/latest/linux/licensight-scan
+          curl -Lo $RUNNER_TEMP/licensight-scan -O https://licensight.s3.eu-central-1.amazonaws.com/1.1.1.pre-release/linux/licensight-scan
           chmod +x $RUNNER_TEMP/licensight-scan
       - name: Licensight scan for branch
         if: github.event_name == 'pull_request'
