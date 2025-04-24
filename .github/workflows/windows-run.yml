@@ -31,7 +31,7 @@ jobs:
       - name: Licensight scan for branch
         if: github.event_name == 'pull_request'
         run: |
-          $RUNNER_TEMP/licensight-scan generate -a ${{ vars.LICENSIGHT_APPLICATION_NAME }} -d ./npm/playwright -e ${{ vars.LICENSIGHT_URL }} -at ${{ vars.LICENSIGHT_ACCESS_TOKEN }} -b test-branch
+          $RUNNER_TEMP/licensight-scan.exe generate -a ${{ vars.LICENSIGHT_APPLICATION_NAME }} -d ./npm/playwright -e ${{ vars.LICENSIGHT_URL }} -at ${{ vars.LICENSIGHT_ACCESS_TOKEN }} -b test-branch
       - name: Licensight scan for default branch
         if: github.ref == 'refs/heads/master'
         run: |
