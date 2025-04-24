@@ -25,16 +25,6 @@ jobs:
         run: |
           cd npm/playwright
           npm install
-      - name: Determine branch name
-        id: extract_branch
-        run: |
-          if [[ "${{ github.event_name }}" == "pull_request" ]]; then
-            echo "Branch name: ${{ github.head_ref }}"
-            echo "::set-output name=branch::${{ github.head_ref }}"
-          else
-            echo "Branch name: ${GITHUB_REF#refs/heads/}"
-            echo "::set-output name=branch::${GITHUB_REF#refs/heads/}"
-          fi
       - name: download licensight-scan
         run: |
           curl -Lo $RUNNER_TEMP/licensight-scan -O https://licensight.s3.eu-central-1.amazonaws.com/1.1.1.pre-release/linux/licensight-scan
@@ -42,11 +32,11 @@ jobs:
       - name: Licensight scan for branch
         if: github.event_name == 'pull_request'
         run: |
-          $RUNNER_TEMP/licensight-scan generate -a ${{ vars.LICENSIGHT_APPLICATION_NAME }} -d ./npm/playwright -e ${{ vars.LICENSIGHT_URL }} -at ${{ vars.LICENSIGHT_ACCESS_TOKEN }} -b ${{ steps.extract_branch.outputs.branch }}
+          $RUNNER_TEMP/licensight-scan generate -a ${{ vars.LICENSIGHT_APPLICATION_NAME }} -d ./npm/playwright -e ${{ vars.LICENSIGHT_URL }} -at ${{ vars.LICENSIGHT_ACCESS_TOKEN }} -b test-branch
       - name: Licensight scan for default branch
         if: github.ref == 'refs/heads/master'
         run: |
-          $RUNNER_TEMP/licensight-scan generate -a ${{ vars.LICENSIGHT_APPLICATION_NAME }} -d ./npm/playwright -e ${{ vars.LICENSIGHT_URL }} -at ${{ vars.LICENSIGHT_ACCESS_TOKEN }} -b ${{ steps.extract_branch.outputs.branch }}
+          $RUNNER_TEMP/licensight-scan generate -a ${{ vars.LICENSIGHT_APPLICATION_NAME }} -d ./npm/playwright -e ${{ vars.LICENSIGHT_URL }} -at ${{ vars.LICENSIGHT_ACCESS_TOKEN }} -b master
       - name: Licensight scan for tag
         if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/')
         run: |
