@@ -27,8 +27,8 @@ jobs:
           npm install
       - name: download licensight-scan
         run: |
-          curl -Lo $RUNNER_TEMP/licensight-scan -O https://licensight.s3.eu-central-1.amazonaws.com/1.1.1.pre-release/linux/licensight-scan
-          chmod +x $RUNNER_TEMP/licensight-scan
+          curl -Lo $RUNNER_TEMP/licensight-scan -O https://licensight.s3.eu-central-1.amazonaws.com/1.1.1.pre-release/windows/licensight-scan.exe
+          chmod +x $RUNNER_TEMP/licensight-scan.exe
       - name: Licensight scan for branch
         if: github.event_name == 'pull_request'
         run: |
